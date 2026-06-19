@@ -1,0 +1,1 @@
+[SPOC](SPOC.pdf)(Mandikal et al., UT Austin, arXiv:2503.11953v2, Dec 2025) implementation for chefOST.
