@@ -1,13 +1,16 @@
-Implementation of [SPOC](https://arxiv.org/abs/2503.11953) (Mandikal et al., UT Austin) pseudo-labelling, including OSC dynamics constraints, for the WhereToChange benchmark. Labels object regions per frame as **actionable** (1, not yet changed) or **transformed** (2, changed).
-
-**Note**: no training/implementation of the SPOC video transformer model ((c) from Figure 2 below)
-![Figure 2](overview.png)
-
 **All credit for the SPOC method and the WhereToChange benchmark belongs to the original authors:**
 
 > Priyanka Mandikal, Tushar Nagarajan, Alex Stoken, Zihui Xue, Kristen Grauman. **SPOC: Spatially-Progressing Object State Change Segmentation in Video**. arXiv:2503.11953, 2025.
 
+## Overview
+
+Implementation of SPOC pseudo-labelling, including OSC dynamics constraints, for the WhereToChange benchmark. Labels object regions per frame as **actionable** (1, not yet changed) or **transformed** (2, changed).
+
 [Paper](https://arxiv.org/abs/2503.11953) · [Dataset](https://github.com/priyankamandikal/spoc) · [Project page](https://vision.cs.utexas.edu/projects/spoc-spatially-progressing-osc/)
+
+**Note**: no training/implementation of the SPOC video encoder-decoder transformer (part (c) below)
+![Figure 2](overview.png)
+*Figure 2 from Mandikal et al., SPOC (arXiv:2503.11953)*
 
 ## Pipeline
 
