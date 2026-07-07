@@ -13,12 +13,45 @@ Implementation of SPOC pseudo-labelling, including OSC dynamics constraints, for
 *Figure 2 from Mandikal et al., SPOC (arXiv:2503.11953)*
 
 ## Pipeline
-
+<!--
 - `pseudolabel/proposals_modal.py` — stage 1 (Modal GPU): GroundingDINO + SAM + DeAOT -> masklet-ID masks per frame.
 - `pseudolabel/label.py` — stages 2-3 (local): CLIP state scoring -> dynamics constraints -> painted masks.
 - `pseudolabel/diagnose.py` — threshold grid / phrase / oracle diagnostics.
 - `eval/evaluate_miou.py` — the paper's mIoU metric.
 - `run_spoc_pl.sh` — driver: label + paint every OSC of a verb, then eval.
+-->
+
+```
+video clip (5 fps)
+  |
+  v
+[Stage 1 - Modal GPU - proposals_modal.py]
+  GroundingDINO (detect noun, every 10 frames)
+    -> SAM (32x32 point-grid masks, gated by boxes)
+    -> DeAOT (track masklets between detections)
+  |
+  v
+masklet-ID masks (palettized PNG, 1fps)
+  |
+  v
++--------------------------------------------------------------+
+| run_spoc_pl.sh  (driver: loops over every OSC of a verb)     | 
+|                                                              |
+|  [Stages 2-3 - local - label.py]                             |
+|    CLIP scoring (crop vs. actionable/transformed text)       |
+|      -> raw labels (bg / amb / act / trf)                    |
+|      -> dynamics constraints (causal order + ambiguity res.) |
+|      -> painted masks (0=bg 1=act 2=trf)                     |
+|    |                                                         |
+|    v                                                         |
+|  [eval/evaluate_miou.py]  <---  ground truth masks           |
+|    mIoU vs ground truth        (data/WhereToChange)          |
++--------------------------------------------------------------+
+                       |
+                       v (cached scores + embeddings, outside run_spoc_pl.sh)
+                 [pseudolabel/diagnose.py]
+                  threshold grid / phrases / oracle diagnostics
+```
 
 ## Usage
 
