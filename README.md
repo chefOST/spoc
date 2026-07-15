@@ -4,7 +4,7 @@
 
 ## Overview
 
-See [my notes](notes.md) for more details.
+See [my notes](notes.md) for more details and takeaways for chefOST.
 
 This repo is an implementation of SPOC pseudo-labelling, including OSC dynamics constraints, for the WhereToChange benchmark. Labels object regions per frame as **actionable** (1, not yet changed) or **transformed** (2, changed).
 

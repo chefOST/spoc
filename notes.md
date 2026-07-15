@@ -117,5 +117,5 @@ trained with cross-entropy loss against the pseudo-labels.
 ### WhereToChange
 
 **Manually labelled ground truth (i.e. not pseudo-labelled by default, although we are pseudo-labelling it in this repo)**
-- WTC-HowTo: 1,001 videos — frames + GT masks for all of them (complete, matches the eval split exactly).
-- WTC-VOST: 261 videos have frames on disk, but only 155 (100 cut + 55 peel) have GT masks — the other 106 are raw frames from clips that got filtered out during annotation (motion blur, ambiguous states, etc., per the paper's curation process), so they're not usable for eval.
+- WTC-HowTo: 1,001 videos - frames + GT masks for all 
+- WTC-VOST: 261 videos, but only 155 (100 cut + 55 peel) have GT masks - the other 106 are raw clips filtered out during annotation (due to motion blur, ambiguous states, etc)
