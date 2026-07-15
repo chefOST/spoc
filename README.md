@@ -10,7 +10,8 @@ This repo is an implementation of SPOC pseudo-labelling, including OSC dynamics 
 
 [Paper](https://arxiv.org/abs/2503.11953) · [Dataset](https://github.com/priyankamandikal/spoc) · [Project page](https://vision.cs.utexas.edu/projects/spoc-spatially-progressing-osc/)
 
-**Note**: no training/implementation of the SPOC video encoder-decoder transformer (part (c) below)
+**Note**: no training/implementation of the SPOC video encoder-decoder transformer (part (c) below). To implement the transformer, we would need a seperate batch of videos from HowToChange/HowTo100M (paper's stated source) to avoid data leakage. After generating pseudo-labels and training the transformer on these pseudo-labeled masks, we then *evaluate* on WhereToChange.
+
 ![Figure 2](overview.png)
 *Figure 2 from Mandikal et al., SPOC (arXiv:2503.11953)*
 
