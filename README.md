@@ -4,7 +4,7 @@
 
 ## Overview
 
-For more details, see [my notes and takeaways](notes.md).
+See [my notes](notes.md) for more details.
 
 This repo is an implementation of SPOC pseudo-labelling, including OSC dynamics constraints, for the WhereToChange benchmark. Labels object regions per frame as **actionable** (1, not yet changed) or **transformed** (2, changed).
 
@@ -12,7 +12,7 @@ This repo is an implementation of SPOC pseudo-labelling, including OSC dynamics 
 
 **Note**: no training/implementation of the SPOC video encoder-decoder transformer (part (c) below). To implement the transformer, we would need a seperate batch of videos from HowToChange/HowTo100M (paper's stated source) to avoid data leakage. After generating pseudo-labels and training the transformer on these pseudo-labeled masks, we then *evaluate* on WhereToChange.
 
-![Figure 2](overview.png)
+![Figure 2](paper/overview.png)
 *Figure 2 from Mandikal et al., SPOC (arXiv:2503.11953)*
 
 ## Pipeline

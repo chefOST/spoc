@@ -48,7 +48,7 @@ Both pseudo-labeling and the trained model aims to assign each mask one of three
 
 The trained model is a lightwegith, 3-layer transformer encoder (512 hidden dim, 4 heads) + 1-layer MLP decoder, only 9.7M trainable parameters. For comparison: CLIP 88M, SAM 636M, DeAOT 49M. The main blocker: need to run pseudo-labelling on low thousands of clips for each verb to obtain training data. 
 
-![Figure 2](overview.png)
+![Figure 2](paper/overview.png)
 #### 1. Pseudo-labelling pipeline (this repo):
 ```
 GroundingDINO → SAM → DeAOT           (stage 1: WHERE)
@@ -92,10 +92,10 @@ s_{trf} & \text{otherwise}
 \end{cases}
 $$
 
-Some important hyperparameters for the pretrained models:
-![Table C](hyperparams.png)
+The paper's hyperparameters, used in this repo's implementation:
+![Table C](paper/hyperparams.png)
 
-#### 2. Trained video model (not in this repo)
+#### 2. Trained video model (not implemented in this repo)
 For each frame $I_t$ and mask proposal $M_t^k$, combine local (CLIP, mask-level) and global (DINOv2, frame-level)
 features with mask/time positional embeddings:
 
@@ -112,7 +112,7 @@ $$
 
 trained with cross-entropy loss against the pseudo-labels.
 
-![Figure 3](model.png)
+![Figure 3](paper/model.png)
 
 ### WhereToChange
 
