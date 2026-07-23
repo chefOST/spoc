@@ -30,12 +30,13 @@ Acronyms
 - SPOC = spatially-progressing OSC segmentation. Not all OSCs are spatially progressing - define a spatially-progressing OSC as a state change that sequentially affects different regions of an object. Grating, peeling, shredding, painting but not grilling, frying, blending (state change occurs uniformly for whole object)
 
 ### Previous work
-- OSC: classification, temporal segmentation, generation. HowToChange (VidOSC) - classification for unseen object categories. VOST, VSCOS - segmentation of **entire** object through video, this paper addresses state changes **within** objects
-- Video object segmentation (VOS): seperate foreground objects from background at pixel level. Most work is semi-supervised VOS - given ground truth masks in first frame, track target objects. Some recent datasets consider state changes but at whole object level
-- Open-vocab segmentation: Segment-Anything (SAM) is a segmentation model without a fixed label set. generalizes to object/images it hasn't seen before, promptable segmentation (user click, text prompt, etc). However falls short for state changes 
-- Vision and language: Constrastive Language-Image Pretraining (CLIP) trained on image-text pairs to learn shared embedding space. SAM+CLIP - CLIP proposes, SAM segments OR SAM proposes, CLIP labels. However falls short for state changes  
 
-Overall, minimal research for pixel-level segmentation of intra-object state changes
+- OSC research splits broadly into three categories: classification, temporal segmentation, generation. [HowToChange (VidOSC)](https://arxiv.org/abs/2312.11782) - classification for unseen object categories. [VOST](https://arxiv.org/abs/2212.06200), [VSCOS](https://openaccess.thecvf.com/content/ICCV2023/papers/Yu_Video_State-Changing_Object_Segmentation_ICCV_2023_paper.pdf) - segmentation of **entire** object through video, however this paper addresses state changes **within** objects
+- Video object segmentation (VOS): seperate foreground objects from background at pixel level. Most work is semi-supervised VOS - given ground truth masks in first frame, track target objects. Some recent datasets consider state changes but at whole object level (VOST, VSCOS above)
+- Open-vocab segmentation: [Segment-Anything (SAM)](https://arxiv.org/abs/2304.02643) is a segmentation model without a fixed label set. generalizes to object/images it hasn't seen before, promptable segmentation (user click, text prompt, etc).
+- Vision and language: [Constrastive Language-Image Pretraining (CLIP)](https://arxiv.org/abs/2103.00020) trained on image-text pairs to learn shared embedding space. SAM+CLIP - CLIP proposes, SAM segments OR SAM proposes, CLIP labels.
+
+Overall, there exists minimal research for **pixel-level** segmentation of **intra-object** state changes
 
 
 ### Approach
@@ -113,6 +114,14 @@ $$
 trained with cross-entropy loss against the pseudo-labels.
 
 ![Figure 3](paper/model.png)
+
+**Why transformers (i.e. on top of MLPs)?**
+- Because OSCs are fundamentally contextual - labels at each region depend on other regions. CO/AR are like high-level hard-coded versions of the subtler dependencies the transformer learns
+- Since self-attention naturally handles these dependencies, of **arbitrary** range too (i.e. which frame relates to which, arbitrarily far apart - both spatially and temporally. CNNs have locality bias), transformers have become default backbone of most video models
+
+**How does a model trained on pseudo-labels beat pseudo-labelling (0.502 vs 0.455 mIoU)?**
+- Because pseudo-labels are noisy and the model learns the dominant signal
+- Furthermore, ambiguous-labeled proposals are explicitly excluded from the loss ("preventing loss backpropagation for such proposals... ensuring they do not influence model training")
 
 ### WhereToChange
 
