@@ -8,13 +8,13 @@ Takeaways for chefOST + paper summary
 
 - Currently a separate transformer must be trained for each verb - "generalizing to unseen actions would entail training an action-conditioned multi-task model, which we leave to future work"
   - Scalability limit
-  - Moreover, this approach views the state-change trajectory of a verb as largely object-agnostic, which brings into question how well it can generalize to more unique object-specific actions like an egg scrambling
+  - Moreover, this method views verbs as **object-agnostic**, which brings into question how well it can generalize to more unique object-specific actions like an egg scrambling
   - It also treats each state change as self-contained, but a real object's lifecycle in the real world is a chain of multiple such trajectories, i.e. in a single video an onion may be peeled then chopped then browned. Thus, a natural extension: a trajectory model that chains together these sequential OSCs, recognizing where each action starts/ends.
 
 - Two failure modes mentioned (Sec F): (a) the detector outputs a single box spanning both actionable and transformed regions when they're too spatially close (e.g. hopping chive); (b) DeOAT loses object identity under fast/drastic transformation (e.g. melting butter) - an object needs level of structural stability needed for accuracy.
-  - Root cause: currently, mask proposal and tracking with SAM/GroundingDINO/DeAOT is state-blind, i.e. GroundingDINO detects the noun only -> SAM proposes candidate masks -> DeOAT tracks, but these pretrained models have no notion of state. From the paper: "an exciting avenue to explore would be to predict mask proposals for actionable and transformed regions directly from the image... learning intra-object mask proposal end-to-end while also being sensitive to OSC dynamics over time." 
+  - Root cause: currently, mask proposal and tracking with SAM/GroundingDINO/DeAOT is state-blind, i.e. GroundingDINO detects the noun only -> SAM proposes candidate masks -> DeOAT tracks, but these pretrained models can't discern state. From the paper: "an exciting avenue to explore would be to predict mask proposals for actionable and transformed regions directly from the image... learning intra-object mask proposal end-to-end while also being sensitive to OSC dynamics over time." 
 
-- Paper focuses on spatially-progressing OSCs (see paper summary below)
+- Paper focuses on spatially-progressing OSCs (see paper summary below). Grilling, frying, blending, etc (where state change occurs uniformly across whole object) aren't handled by SPOC
 
 ## Paper summary
 
@@ -27,7 +27,7 @@ Paper outputs
 
 Acronyms
 - OSC = object state changes
-- SPOC = spatially-progressing OSC segmentation. Not all OSCs are spatially progressing - define a spatially-progressing OSC as a state change that sequentially affects different regions of an object. Grating, peeling, shredding, painting but not grilling, frying, blending (state change occurs uniformly for whole object)
+- SPOC = spatially-progressing OSC segmentation. Not all OSCs are spatially progressing - define a spatially-progressing OSC as a state change that sequentially affects different regions of an object. Grating, peeling, shredding, painting but not grilling, frying, blending (state change occurs uniformly across whole object)
 
 ### Previous work
 
