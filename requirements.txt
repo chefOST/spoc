@@ -1,5 +1,0 @@
-numpy
-pillow
-torch
-transformers
-modal
