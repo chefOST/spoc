@@ -1,7 +1,7 @@
 .venv/
 .env
 __pycache__/
-*.pyc
+*.py[cod]
 .pytest_cache/
 .ruff_cache/
 .DS_Store
@@ -10,3 +10,6 @@ data/
 logs/
 outputs/
 /wandb/
+.env.*
+!.env.example
+/runs/
