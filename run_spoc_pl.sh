@@ -20,4 +20,3 @@ for OSC_DIR in $PROPS/${VERB}_*; do
   ln -sfn "$(pwd)/$OUT/$OSC/masks" "${OUT}_masks/$OSC"  # eval friendly layout
 done
 
-$PY eval/evaluate_miou.py --dataset "$DATASET" --verb "$VERB" --pred-dir "${OUT}_masks" --skip-missing
