@@ -6,7 +6,7 @@ SPOC research for object-state tracking in procedural cooking videos.
 
 - [Organization guide](https://github.com/chefOST/.github/blob/main/profile/README.md).
 - [Project goals](https://github.com/chefOST/.github/blob/main/docs/PaperNotes.md#project-goals) and [paper notes](https://github.com/chefOST/.github/blob/main/docs/PaperNotes.md#2-spoc).
-- [Evaluation definitions](https://github.com/chefOST/.github/blob/main/docs/Evaluation.md) and the sole [evaluation implementation](https://github.com/chefOST/chefOST-data#evaluation).
+- Evaluation: [definitions](https://github.com/chefOST/.github/blob/main/docs/Evaluation.md), [shared implementation](https://github.com/chefOST/chefOST-data#evaluation), and [full-run-evals results](https://wandb.ai/chefOST/full-run-evals).
 - [Contribution rules](https://github.com/chefOST/.github/blob/main/CONTRIBUTING.md) and [agent instructions](AGENTS.md).
 
 ## Data
